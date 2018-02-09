@@ -1,0 +1,15 @@
+MatchQuery,MatchQueryTopLevel,MatchQueryFamilies,MatchQueryDescendants,MatchGUID,MatchKind,MatchMD5,MatchDocumentID,MatchProperty:Mapi-Sender-Name,MatchCustomMetadata:Animal,AddTags,RemoveTags,AssignCustodian,Exclude,AppendComment,SetComment,SetCustomMetadata:Animal
+cat OR dog,,,,,,,,,,Animals|Hits|CatOrDog;Animals|Cat;Animals|Dog;Animals|Garfield,,,,,,Cat or Dog
+cat,,,,,,,,,,Animals|TopLevel|CatOrDog,Animals|Garfield,,,,,Cat
+,cat OR dog,,,,,,,,,Animals|Families|CatOrDog,,,,,,
+,,cat OR dog,,,,,,,,Animals|TopLevel|CatOrDog,,,,,,
+,,,cat OR dog,,,,,,,Animals|Families|CatOrDog,,,,,,
+,,,,0f310e25-f75c-4cd6-ad6f-609bec48c942,,,,,,GuidMatch,,,,,,
+,,,,,email,,,,,KindEmailMatch,,,,,,
+,,,,,,55dc8fe418df06fdce5f1729d37d16ff,,,,Md5Match,,,,,,
+,,,,,,,DOC-000000002,,,DocIDMatch,,,,,,
+,,,,,,,,Jan Rogers,,PropertyMatch,,Jan Rogers,,,,
+,,,,,,,,,Cat,CustomMetadataMatch,,,,,,
+-flag:audited,,,,,,,,,,Excluded,,,Immaterial,,,
+cat OR dog,,,,,,,,,,,,,,This is a test comment,,
+cat OR dog,,,,,,,,,,,,,,,This is an appended comment,
