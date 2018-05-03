@@ -1,5 +1,9 @@
+Annotate from CSV
+=================
+
 ![Last tested in Nuix 7.4](https://img.shields.io/badge/Nuix-7.4-green.svg)
 
+View the GitHub project [here](https://github.com/Nuix/Annotate-From-CSV) or download the latest release [here](https://github.com/Nuix/Annotate-From-CSV/releases).
 
 # Overview
 
