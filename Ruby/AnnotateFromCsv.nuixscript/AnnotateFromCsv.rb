@@ -29,39 +29,39 @@ dialog.display
 
 # If settings are valid and user clicked OK lets proceed
 if dialog.getDialogResult == true
-	# Get settings from settings dialog
-	values = dialog.toMap
+  # Get settings from settings dialog
+  values = dialog.toMap
 
-	# Extract settings from hash into variables for convenience
-	input_csv = values["input_csv"]
+  # Extract settings from hash into variables for convenience
+  input_csv = values["input_csv"]
 
-	# Display a progress dialog while we do the work
-	ProgressDialog.forBlock do |pd|
-		# Set progress dialog title
-		pd.setTitle("Annotate from CSV")
+  # Display a progress dialog while we do the work
+  ProgressDialog.forBlock do |pd|
+    # Set progress dialog title
+    pd.setTitle("Annotate from CSV")
 
-		# Disable abort button
-		pd.setAbortButtonVisible(false)
+    # Disable abort button
+    pd.setAbortButtonVisible(false)
 
-		# Connect up parser callback so messages it logs will be displayed
-		# in the progress dialog's log area and to the script console in Nuix
-		AnnotationCSVParser.when_message_logged do |message|
-			pd.logMessage(message)
-			puts message
-		end
+    # Connect up parser callback so messages it logs will be displayed
+    # in the progress dialog's log area and to the script console in Nuix
+    AnnotationCSVParser.when_message_logged do |message|
+      pd.logMessage(message)
+      puts message
+    end
 
-		# Connect up parser callback so progress updates are reported to the
-		# progress dialog
-		AnnotationCSVParser.when_progress_updated do |current,total|
-			pd.setMainStatus("Processing row #{current+1}/#{total}")
-			pd.logMessage("===== Processing row #{current+1}/#{total} =====")
-			pd.setMainProgress(current+1,total)
-		end
+    # Connect up parser callback so progress updates are reported to the
+    # progress dialog
+    AnnotationCSVParser.when_progress_updated do |current,total|
+      pd.setMainStatus("Processing row #{current+1}/#{total}")
+      pd.logMessage("===== Processing row #{current+1}/#{total} =====")
+      pd.setMainProgress(current+1,total)
+    end
 
-		# Begin processing the CSV
-		AnnotationCSVParser.process_csv(input_csv)
+    # Begin processing the CSV
+    AnnotationCSVParser.process_csv(input_csv)
 
-		# Set progress dialog to a completed state
-		pd.setCompleted
-	end
+    # Set progress dialog to a completed state
+    pd.setCompleted
+  end
 end
