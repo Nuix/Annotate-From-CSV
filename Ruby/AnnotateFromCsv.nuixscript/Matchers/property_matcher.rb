@@ -22,7 +22,7 @@ class PropertyMatcher < CSVMatcherBase
     items = nuix_case.search("properties:\"#{@property_name}:#{column_value}\"")
     # Further refine matches to only items where the given property contains the exact
     # specified value
-    items = items.select do |item|
+    items.select do |item|
       next item.getProperties[@property_name] == column_value
     end
   end

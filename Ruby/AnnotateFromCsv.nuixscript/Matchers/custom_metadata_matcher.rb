@@ -21,7 +21,7 @@ class CustomMetadataMatcher < CSVMatcherBase
     # Get intial items which match a custom metadata search
     items = nuix_case.search("custom-metadata:\"#{@field_name}\":\"#{column_value}\"")
     # Further validate each hit actually matches
-    items = items.select do |item|
+    items.select do |item|
       next (item.getCustomMetadata[@field_name] || '').to_s == column_value
     end
   end
