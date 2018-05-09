@@ -42,7 +42,7 @@ class AnnotationCSVParser
     else
       # Some matcher was able to give us some items
       if @remove_excluded_items
-        items = items.reject { |i| i.isExcluded }
+        items = items.reject(&:excluded?)
       end
 
       if items.empty?
@@ -152,7 +152,7 @@ class AnnotationCSVParser
     # matchers and annotaters.  All other rows we will store in an array for their later use.
     CSV.foreach(csv_path) do |row|
       if headers.nil?
-        headers = row.reject { |v| v.nil? }.map { |v| v.strip }.reject { |v|v.empty? }
+        headers = row.reject(&:nil?).map(&:strip).reject(&:empty?)
         parser = build_from_headers(headers)
       else
         data << row

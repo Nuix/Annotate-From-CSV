@@ -16,7 +16,7 @@ class AddTagsAnnotater < CSVAnnotaterBase
   def perform_annotation(items, column_value, nuix_case)
     # Split column value by ;, trim whitespace and dump empty entries
     # to get the series of tags to be applied
-    tags = column_value.split(';').map { |t| t.strip }.reject { |t| t.empty? }
+    tags = column_value.split(';').map(&:strip).reject(&:empty?)
     # Apply each tag (if any)
     tags.each do |tag|
       AnnotationCSVParser.log("Adding tag #{tag} to #{items.size} items")

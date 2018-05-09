@@ -16,7 +16,7 @@ class RemoveTagsAnnotater < CSVAnnotaterBase
   def perform_annotation(items, column_value, nuix_case)
     # Split column value by ;, trim whitespace and dump empty entries
     # to get the series of tags to be applied
-    tags = column_value.split(';').map { |t| t.strip }
+    tags = column_value.split(';').map(&:strip)
     # Remove each tag (if any)
     tags.each do |tag|
       AnnotationCSVParser.log("Removing tag #{tag} from #{items.size} items")
