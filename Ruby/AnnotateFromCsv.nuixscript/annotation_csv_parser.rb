@@ -147,7 +147,6 @@ class AnnotationCSVParser
 
     headers = nil
     parser = nil
-    row_index = 0
     data = []
 
     # Iterate CSV rows, skimming off headers row which will be used to construct series of
@@ -159,7 +158,6 @@ class AnnotationCSVParser
       else
         data << row
       end
-      row_index += 1
     end
 
     # For each non-header row, let the matcher and annotater instances we constructed earlier
