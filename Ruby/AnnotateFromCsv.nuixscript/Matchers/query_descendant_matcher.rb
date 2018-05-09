@@ -3,10 +3,6 @@ class QueryDescendantMatcher < CSVMatcherBase
   # Regular expression used to recognize columns handled by this matcher
   @@header_regex = /^MatchQueryDescendants$/
 
-  def initialize(header, col_index)
-    @col_index = col_index
-  end
-
   # Returns true if this matcher should take ownership of a given column based upon
   # that columns header value
   def self.your_header?(header)

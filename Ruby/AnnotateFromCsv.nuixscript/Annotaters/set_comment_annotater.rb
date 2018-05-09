@@ -2,10 +2,6 @@
 class SetCommentAnnotater < CSVAnnotaterBase
   @@header_regex = /^SetComment$/
 
-  def initialize(header, col_index)
-    @col_index = col_index
-  end
-
   # Returns true if this annotater should take ownership of a given column based upon
   # that columns header value
   def self.your_header?(header)
@@ -13,7 +9,7 @@ class SetCommentAnnotater < CSVAnnotaterBase
   end
 
   # This method takes the items found by some matcher and performs the relevant annotation on them
-  def perform_annotation(items, column_value, nuix_case)
+  def perform_annotation(items, column_value, _nuix_case)
     # Set comment if column had a value
     unless column_value.strip.empty?
       items.each do |item|

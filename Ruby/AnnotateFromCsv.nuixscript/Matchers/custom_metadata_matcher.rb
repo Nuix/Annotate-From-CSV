@@ -6,7 +6,8 @@ class CustomMetadataMatcher < CSVMatcherBase
   @field_name = nil
 
   def initialize(header, col_index)
-    @col_index = col_index
+    super(header, col_index)
+
     @field_name = header.gsub(@@header_regex, '\\1')
   end
 

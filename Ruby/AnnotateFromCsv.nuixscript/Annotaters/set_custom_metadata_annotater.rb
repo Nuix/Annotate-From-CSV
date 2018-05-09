@@ -9,7 +9,8 @@ class SetCustomMetadataAnnotater < CSVAnnotaterBase
   @field_name = nil
 
   def initialize(header, col_index)
-    @col_index = col_index
+    super(header, col_index)
+
     @field_name = header.gsub(@@header_regex, '\\1')
   end
 
@@ -20,7 +21,7 @@ class SetCustomMetadataAnnotater < CSVAnnotaterBase
   end
 
   # This method takes the items found by some matcher and performs the relevant annotation on them
-  def perform_annotation(items, column_value, nuix_case)
+  def perform_annotation(items, column_value, _nuix_case)
     # Only apply a value if the column was not empty
     unless column_value.strip.empty?
       # Analyze the column value to try and determine the data type

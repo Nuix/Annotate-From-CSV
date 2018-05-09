@@ -2,12 +2,20 @@ require 'csv'
 
 # Base class for matchers
 class CSVMatcherBase
-  attr_accessor :col_index
+  attr_reader :col_index
+
+  def initialize(_header, col_index)
+    @col_index = col_index
+  end
 end
 
 # Base class for annotaters
 class CSVAnnotaterBase
-  attr_accessor :col_index
+  attr_reader :col_index
+
+  def initialize(_header, col_index)
+    @col_index = col_index
+  end
 end
 
 # Parses a CSV, constructing matchers and parsers based on headers
