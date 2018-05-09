@@ -1,0 +1,8 @@
+require 'rubocop/rake_task'
+
+task default: [:rubocop]
+
+RuboCop::RakeTask.new(:rubocop) do |task|
+  # TODO: These are worth fixing too, they just require more thought.
+  task.options = ['--except', 'Metrics']
+end
