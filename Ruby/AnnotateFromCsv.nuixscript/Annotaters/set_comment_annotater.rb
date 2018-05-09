@@ -1,11 +1,9 @@
 # Sets/overwrites existing comments with new comment based on row value
 class SetCommentAnnotater < CSVAnnotaterBase
-  @@header_regex = /^SetComment$/
-
   # Returns true if this annotater should take ownership of a given column based upon
   # that columns header value
   def self.your_header?(header)
-    header =~ @@header_regex
+    header =~ /^SetComment$/
   end
 
   # This method takes the items found by some matcher and performs the relevant annotation on them

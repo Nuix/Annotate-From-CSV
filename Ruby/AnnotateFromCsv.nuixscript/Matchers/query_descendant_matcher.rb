@@ -1,12 +1,9 @@
 # Matches items by provided query, returning their descendants
 class QueryDescendantMatcher < CSVMatcherBase
-  # Regular expression used to recognize columns handled by this matcher
-  @@header_regex = /^MatchQueryDescendants$/
-
   # Returns true if this matcher should take ownership of a given column based upon
   # that columns header value
   def self.your_header?(header)
-    header =~ @@header_regex
+    header =~ /^MatchQueryDescendants$/
   end
 
   # This method returns the items this matcher matches against given a particular row's value

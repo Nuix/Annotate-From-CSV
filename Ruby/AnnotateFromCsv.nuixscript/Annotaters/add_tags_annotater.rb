@@ -1,11 +1,9 @@
 # Tags items with a tag based on value in row
 class AddTagsAnnotater < CSVAnnotaterBase
-  @@header_regex = /^AddTags$/
-
   # Returns true if this annotater should take ownership of a given column based upon
   # that columns header value
   def self.your_header?(header)
-    header =~ @@header_regex
+    header =~ /^AddTags$/
   end
 
   # This method takes the items found by some matcher and performs the relevant annotation on them

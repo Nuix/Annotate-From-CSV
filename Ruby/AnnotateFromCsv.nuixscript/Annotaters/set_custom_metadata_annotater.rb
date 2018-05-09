@@ -1,13 +1,6 @@
 # Sets/overwrites custom meadata field.  Field name based on value provided in header and
 # value written to that field based on CSV row value
 class SetCustomMetadataAnnotater < CSVAnnotaterBase
-  @@header_regex = /^SetCustomMetadata:(.+)$/
-  @@number_regex = /^[0-9]+$/
-  @@float_regex = /^[0-9]+\.[0-9]+$/
-  @@bool_regex = /^(true)|(false)$/i
-
-  @field_name = nil
-
   def initialize(header, col_index)
     super(header, col_index)
 
@@ -17,7 +10,7 @@ class SetCustomMetadataAnnotater < CSVAnnotaterBase
   # Returns true if this annotater should take ownership of a given column based upon
   # that columns header value
   def self.your_header?(header)
-    header =~ @@header_regex
+    header =~ /^SetCustomMetadata:(.+)$/
   end
 
   # This method takes the items found by some matcher and performs the relevant annotation on them
@@ -30,13 +23,13 @@ class SetCustomMetadataAnnotater < CSVAnnotaterBase
     # for example the string "1234" gets stored as the integer 1234
     value_type = nil
     value = nil
-    if column_value =~ @@number_regex
+    if column_value =~ /^[0-9]+$/
       value_type = 'integer'
       value = column_value.to_i
-    elsif column_value =~ @@float_regex
+    elsif column_value =~ /^[0-9]+\.[0-9]+$/
       value_type = 'float'
       value = column_value.to_f
-    elsif column_value =~ @@bool_regex
+    elsif column_value =~ /^(true)|(false)$/i
       value_type = 'boolean'
       value = column_value.strip.casecmp('true').zero?
     else

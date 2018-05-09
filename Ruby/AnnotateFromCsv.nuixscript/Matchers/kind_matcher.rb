@@ -1,12 +1,9 @@
 # Matches item by kind
 class KindMatcher < CSVMatcherBase
-  # Regular expression used to recognize columns handled by this matcher
-  @@header_regex = /^MatchKind$/
-
   # Returns true if this matcher should take ownership of a given column based upon
   # that columns header value
   def self.your_header?(header)
-    header =~ @@header_regex
+    header =~ /^MatchKind$/
   end
 
   # This method returns the items this matcher matches against given a particular row's value

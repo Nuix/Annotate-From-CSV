@@ -1,11 +1,9 @@
 # Excludes items with exclusion name based on row value
 class ExcludeAnnotater < CSVAnnotaterBase
-  @@header_regex = /^Exclude$/
-
   # Returns true if this annotater should take ownership of a given column based upon
   # that columns header value
   def self.your_header?(header)
-    header =~ @@header_regex
+    header =~ /^Exclude$/
   end
 
   # This method takes the items found by some matcher and performs the relevant annotation on them

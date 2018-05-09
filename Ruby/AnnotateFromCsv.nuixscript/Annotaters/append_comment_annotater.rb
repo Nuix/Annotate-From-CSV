@@ -1,11 +1,9 @@
 # Appends row value to comment field of items
 class AppendCommentAnnotater < CSVAnnotaterBase
-  @@header_regex = /^AppendComment$/
-
   # Returns true if this annotater should take ownership of a given column based upon
   # that columns header value
   def self.your_header?(header)
-    header =~ @@header_regex
+    header =~ /^AppendComment$/
   end
 
   # This method takes the items found by some matcher and performs the relevant annotation on them

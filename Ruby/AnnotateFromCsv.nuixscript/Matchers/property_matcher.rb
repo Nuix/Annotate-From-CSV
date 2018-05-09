@@ -1,10 +1,5 @@
 # Matches items by property value
 class PropertyMatcher < CSVMatcherBase
-  # Regular expression used to recognize columns handled by this matcher
-  @@header_regex = /^MatchProperty:(.*)$/
-
-  @property_name = nil
-
   def initialize(header, col_index)
     super(header, col_index)
 
@@ -14,7 +9,7 @@ class PropertyMatcher < CSVMatcherBase
   # Returns true if this matcher should take ownership of a given column based upon
   # that columns header value
   def self.your_header?(header)
-    header =~ @@header_regex
+    header =~ /^MatchProperty:(.*)$/
   end
 
   # This method returns the items this matcher matches against given a particular row's value

@@ -1,10 +1,5 @@
 # Matches items based on a value in a specified custom metadata field
 class CustomMetadataMatcher < CSVMatcherBase
-  # Regular expression used to recognize columns handled by this matcher
-  @@header_regex = /^MatchCustomMetadata:(.*)$/
-
-  @field_name = nil
-
   def initialize(header, col_index)
     super(header, col_index)
 
@@ -14,7 +9,7 @@ class CustomMetadataMatcher < CSVMatcherBase
   # Returns true if this matcher should take ownership of a given column based upon
   # that columns header value
   def self.your_header?(header)
-    header =~ @@header_regex
+    header =~ /^MatchCustomMetadata:(.*)$/
   end
 
   # This method returns the items this matcher matches against given a particular row's value

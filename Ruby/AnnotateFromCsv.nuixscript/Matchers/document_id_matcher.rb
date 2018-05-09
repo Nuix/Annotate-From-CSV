@@ -1,12 +1,9 @@
 # Matches items based on their associated document ID
 class DocumentIDMatcher < CSVMatcherBase
-  # Regular expression used to recognize columns handled by this matcher
-  @@header_regex = /^MatchDocumentID$/
-
   # Returns true if this matcher should take ownership of a given column based upon
   # that columns header value
   def self.your_header?(header)
-    header =~ @@header_regex
+    header =~ /^MatchDocumentID$/
   end
 
   # This method returns the items this matcher matches against given a particular row's value

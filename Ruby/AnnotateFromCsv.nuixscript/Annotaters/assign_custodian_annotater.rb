@@ -1,11 +1,9 @@
 # Assigns custodian to items based on row value
 class AssignCustodianAnnotater < CSVAnnotaterBase
-  @@header_regex = /^AssignCustodian$/
-
   # Returns true if this annotater should take ownership of a given column based upon
   # that columns header value
   def self.your_header?(header)
-    header =~ @@header_regex
+    header =~ /^AssignCustodian$/
   end
 
   # This method takes the items found by some matcher and performs the relevant annotation on them
