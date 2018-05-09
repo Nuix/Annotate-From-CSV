@@ -11,10 +11,10 @@ class AppendCommentAnnotater < CSVAnnotaterBase
   # This method takes the items found by some matcher and performs the relevant annotation on them
   def perform_annotation(items, column_value, _nuix_case)
     # Only append comment if column contained a value
-    unless column_value.strip.empty?
-      items.each do |item|
-        item.appendComment(column_value)
-      end
+    return if column_value.strip.empty?
+
+    items.each do |item|
+      item.appendComment(column_value)
     end
   end
 

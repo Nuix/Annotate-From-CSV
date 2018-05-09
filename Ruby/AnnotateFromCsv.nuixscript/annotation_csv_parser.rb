@@ -67,9 +67,9 @@ class AnnotationCSVParser
 
   # Broadcasts progress updates to callback if registered
   def self.update_progress(current, total)
-    unless @@progress_updated_callback.nil?
-      @@progress_updated_callback.call(current, total)
-    end
+    return if @@progress_updated_callback.nil?
+
+    @@progress_updated_callback.call(current, total)
   end
 
   # Allows code to listen for log messages
@@ -79,9 +79,9 @@ class AnnotationCSVParser
 
   # Broadcasts log messages to callback if registered
   def self.log(message)
-    unless @@message_logged_callback.nil?
-      @@message_logged_callback.call(message)
-    end
+    return if @@message_logged_callback.nil?
+
+    @@message_logged_callback.call(message)
   end
 
   # Returns all defined matchers using reflection to locate all classes

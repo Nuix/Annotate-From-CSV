@@ -11,9 +11,9 @@ class ExcludeAnnotater < CSVAnnotaterBase
   # This method takes the items found by some matcher and performs the relevant annotation on them
   def perform_annotation(items, column_value, _nuix_case)
     # Only exclude items if column had a value
-    unless column_value.strip.empty?
-      $utilities.getBulkAnnotater.exclude(column_value, items)
-    end
+    return if column_value.strip.empty?
+
+    $utilities.getBulkAnnotater.exclude(column_value, items)
   end
 
   def to_s
