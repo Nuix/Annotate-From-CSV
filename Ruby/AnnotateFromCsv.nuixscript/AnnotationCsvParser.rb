@@ -27,12 +27,12 @@ class AnnotationCSVParser
     # Determine matcher for this row
     items = nil
     matchers.each do |matcher|
-      column_value = record_values[matcher.col_index] || ''
-      if !column_value.strip.empty?
-        items = matcher.obtain_items(column_value, nuix_case)
-        if items.size > 0
-          break
-        end
+      column_value = (record_values[matcher.col_index] || '').strip
+      next if column_value.empty?
+
+      items = matcher.obtain_items(column_value, nuix_case)
+      if items.size > 0
+        break
       end
     end
 
@@ -107,12 +107,12 @@ class AnnotationCSVParser
     AnnotationCSVParser.log 'Locating matchers...'
     headers.each_with_index do |header, header_index|
       all_matchers.each do |matcher_class|
-        if matcher_class.is_your_header?(header)
-          matcher_instance = matcher_class.new(header, header_index)
-          instance.matchers << matcher_instance
-          AnnotationCSVParser.log "[#{header_index}] Adding Matcher: #{matcher_instance}"
-          break
-        end
+        next unless matcher_class.is_your_header?(header)
+
+        matcher_instance = matcher_class.new(header, header_index)
+        instance.matchers << matcher_instance
+        AnnotationCSVParser.log "[#{header_index}] Adding Matcher: #{matcher_instance}"
+        break
       end
     end
 
@@ -120,12 +120,12 @@ class AnnotationCSVParser
     AnnotationCSVParser.log 'Locating annotaters...'
     headers.each_with_index do |header, header_index|
       all_annotaters.each do |annotater_class|
-        if annotater_class.is_your_header?(header)
-          annotater_instance = annotater_class.new(header, header_index)
-          instance.annotaters << annotater_instance
-          AnnotationCSVParser.log "[#{header_index}] Adding Annotater: #{annotater_instance}"
-          break
-        end
+        next unless annotater_class.is_your_header?(header)
+
+        annotater_instance = annotater_class.new(header, header_index)
+        instance.annotaters << annotater_instance
+        AnnotationCSVParser.log "[#{header_index}] Adding Annotater: #{annotater_instance}"
+        break
       end
     end
 
