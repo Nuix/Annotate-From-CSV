@@ -31,7 +31,7 @@ class AnnotationCSVParser
       next if column_value.empty?
 
       items = matcher.obtain_items(column_value, nuix_case)
-      if items.size > 0
+      unless items.empty?
         break
       end
     end
@@ -45,7 +45,7 @@ class AnnotationCSVParser
         items = items.reject { |i| i.isExcluded }
       end
 
-      if items.size < 1
+      if items.empty?
         AnnotationCSVParser.log 'After removing excluded items, 0 items remain, moving on...'
       else
         annotaters.each do |annotater|
