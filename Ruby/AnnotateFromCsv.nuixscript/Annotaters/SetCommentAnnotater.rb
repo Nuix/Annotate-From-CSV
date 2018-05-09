@@ -23,6 +23,6 @@ class SetCommentAnnotater < CSVAnnotaterBase
   end
 
   def to_s
-    "Set Comment"
+    'Set Comment'
   end
 end

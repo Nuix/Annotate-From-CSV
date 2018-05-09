@@ -20,6 +20,6 @@ class GUIDMatcher < CSVMatcherBase
   end
 
   def to_s
-    "GUID Matcher"
+    'GUID Matcher'
   end
 end

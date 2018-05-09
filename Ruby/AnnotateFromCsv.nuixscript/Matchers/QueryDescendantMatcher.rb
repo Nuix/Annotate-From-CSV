@@ -22,6 +22,6 @@ class QueryDescendantMatcher < CSVMatcherBase
   end
 
   def to_s
-    "Query Descendant Matcher"
+    'Query Descendant Matcher'
   end
 end

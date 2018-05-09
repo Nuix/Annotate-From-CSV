@@ -21,6 +21,6 @@ class ExcludeAnnotater < CSVAnnotaterBase
   end
 
   def to_s
-    "Exclude"
+    'Exclude'
   end
 end

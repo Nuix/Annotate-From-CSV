@@ -20,6 +20,6 @@ class DocumentIDMatcher < CSVMatcherBase
   end
 
   def to_s
-    "Document ID Matcher"
+    'Document ID Matcher'
   end
 end

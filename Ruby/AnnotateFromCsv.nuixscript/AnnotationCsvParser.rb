@@ -27,7 +27,7 @@ class AnnotationCSVParser
     # Determine matcher for this row
     items = nil
     matchers.each do |matcher|
-      column_value = record_values[matcher.col_index] || ""
+      column_value = record_values[matcher.col_index] || ''
       if !column_value.strip.empty?
         items = matcher.obtain_items(column_value, nuix_case)
         if items.size > 0
@@ -46,10 +46,10 @@ class AnnotationCSVParser
       end
 
       if items.size < 1
-        AnnotationCSVParser.log "After removing excluded items, 0 items remain, moving on..."
+        AnnotationCSVParser.log 'After removing excluded items, 0 items remain, moving on...'
       else
         annotaters.each do |annotater|
-          column_value = record_values[annotater.col_index] || ""
+          column_value = record_values[annotater.col_index] || ''
           annotater.perform_annotation(items, column_value, nuix_case)
         end
       end
@@ -98,13 +98,13 @@ class AnnotationCSVParser
     instance = new
 
     # Log the headers we found
-    AnnotationCSVParser.log "Parsing headers:"
+    AnnotationCSVParser.log 'Parsing headers:'
     headers.each do |header|
       AnnotationCSVParser.log "  '#{header}'"
     end
 
     # Build matchers
-    AnnotationCSVParser.log "Locating matchers..."
+    AnnotationCSVParser.log 'Locating matchers...'
     headers.each_with_index do |header, header_index|
       all_matchers.each do |matcher_class|
         if matcher_class.is_your_header?(header)
@@ -117,7 +117,7 @@ class AnnotationCSVParser
     end
 
     # Build annotaters
-    AnnotationCSVParser.log "Locating annotaters..."
+    AnnotationCSVParser.log 'Locating annotaters...'
     headers.each_with_index do |header, header_index|
       all_annotaters.each do |annotater_class|
         if annotater_class.is_your_header?(header)
@@ -172,8 +172,8 @@ end
 # With the classes defined above, we can now dynamically load all the matchers and annotaters
 # allowing for easy drop in functionality
 script_directory ||= File.dirname(__FILE__)
-matcher_class_files = Dir.glob("#{script_directory.gsub("\\", "/")}/Matchers/**/*.rb")
-annotater_class_files = Dir.glob("#{script_directory.gsub("\\", "/")}/Annotaters/**/*.rb")
+matcher_class_files = Dir.glob("#{script_directory.gsub('\\', '/')}/Matchers/**/*.rb")
+annotater_class_files = Dir.glob("#{script_directory.gsub('\\', '/')}/Annotaters/**/*.rb")
 matcher_class_files.each do |matcher_class_file|
   puts "Loading matcher: #{File.basename(matcher_class_file)}"
   load matcher_class_file

@@ -20,6 +20,6 @@ class QueryMatcher < CSVMatcherBase
   end
 
   def to_s
-    "Query Matcher"
+    'Query Matcher'
   end
 end

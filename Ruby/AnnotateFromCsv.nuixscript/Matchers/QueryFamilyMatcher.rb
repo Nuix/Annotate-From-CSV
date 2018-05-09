@@ -22,6 +22,6 @@ class QueryFamilyMatcher < CSVMatcherBase
   end
 
   def to_s
-    "Query Families Matcher"
+    'Query Families Matcher'
   end
 end

@@ -20,6 +20,6 @@ class MD5Matcher < CSVMatcherBase
   end
 
   def to_s
-    "MD5 Matcher"
+    'MD5 Matcher'
   end
 end

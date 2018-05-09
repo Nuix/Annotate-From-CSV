@@ -7,7 +7,7 @@ class PropertyMatcher < CSVMatcherBase
 
   def initialize(header, col_index)
     @col_index = col_index
-    @property_name = header.gsub(@@header_regex, "\\1")
+    @property_name = header.gsub(@@header_regex, '\\1')
   end
 
   # Returns true if this matcher should take ownership of a given column based upon
@@ -28,6 +28,6 @@ class PropertyMatcher < CSVMatcherBase
   end
 
   def to_s
-    "Property Matcher"
+    'Property Matcher'
   end
 end

@@ -21,6 +21,6 @@ class AssignCustodianAnnotater < CSVAnnotaterBase
   end
 
   def to_s
-    "Assign Custodian"
+    'Assign Custodian'
   end
 end

@@ -10,7 +10,7 @@ class SetCustomMetadataAnnotater < CSVAnnotaterBase
 
   def initialize(header, col_index)
     @col_index = col_index
-    @field_name = header.gsub(@@header_regex, "\\1")
+    @field_name = header.gsub(@@header_regex, '\\1')
   end
 
   # Returns true if this annotater should take ownership of a given column based upon
@@ -29,19 +29,19 @@ class SetCustomMetadataAnnotater < CSVAnnotaterBase
       value_type = nil
       value = nil
       if column_value =~ @@number_regex
-        value_type = "integer"
+        value_type = 'integer'
         value = column_value.to_i
       elsif column_value =~ @@float_regex
-        value_type = "float"
+        value_type = 'float'
         value = column_value.to_f
       elsif column_value =~ @@bool_regex
-        value_type = "boolean"
-        value = column_value.strip.downcase == "true"
+        value_type = 'boolean'
+        value = column_value.strip.downcase == 'true'
       else
-        value_type = "text"
+        value_type = 'text'
         value = column_value
       end
-      $utilities.getBulkAnnotater.putCustomMetadata(@field_name, value, items, value_type, "user", nil, nil)
+      $utilities.getBulkAnnotater.putCustomMetadata(@field_name, value, items, value_type, 'user', nil, nil)
     end
   end
 

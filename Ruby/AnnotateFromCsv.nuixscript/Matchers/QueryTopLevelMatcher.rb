@@ -22,6 +22,6 @@ class QueryTopLevelMatcher < CSVMatcherBase
   end
 
   def to_s
-    "Query Top Level Matcher"
+    'Query Top Level Matcher'
   end
 end

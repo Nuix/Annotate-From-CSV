@@ -20,6 +20,6 @@ class KindMatcher < CSVMatcherBase
   end
 
   def to_s
-    "Kind Matcher"
+    'Kind Matcher'
   end
 end
