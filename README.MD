@@ -73,36 +73,36 @@ To create a custom matcher you must create a class which derives from the `CSVMa
 
 ```ruby
 class MyCustomMatcher < CSVMatcherBase
-	# Regex used to identify this matchers column header
-	@@header_regex = /^MyCustomMatcher$/
+  # Regex used to identify this matchers column header
+  HEADER_REGEX = /^MyCustomMatcher$/
 
-	# When matcher is created it is provided header and column index
-	# @col_index must be set to the column index to function properly later
-	def initialize(header,col_index)
-		@col_index = col_index
-	end
+  # When matcher is created it is provided header and column index
+  # @col_index must be set to the column index to function properly later
+  def initialize(utilities, header, col_index)
+    super(utilities, header, col_index)
+  end
 
-	# This method will be called to determine if it is the appropriate matcher
-	# for a given column.  This is where the header is analyzed to determine if
-	# this matcher is appropriate.  Usually checking the regex above against
-	# the header name is enough.
-	def self.is_your_header?(header)
-		return header =~ @@header_regex
-	end
+  # This method will be called to determine if it is the appropriate matcher
+  # for a given column.  This is where the header is analyzed to determine if
+  # this matcher is appropriate.  Usually checking the regex above against
+  # the header name is enough.
+  def self.your_header?(header)
+    return header =~ HEADER_REGEX
+  end
 
-	# This method is called when a given row has a value for the given column.
-	# This method recieves the given column's value and the nuix_case being operated on.
-	# This method should return a collection of items.  If the array size is less than 1
-	# the next matcher in the CSV will be tested.
-	def obtain_items(column_value,nuix_case)
-		items = nuix_case.search(column_value)
-		return items
-	end
+  # This method is called when a given row has a value for the given column.
+  # This method recieves the given column's value and the nuix_case being operated on.
+  # This method should return a collection of items.  If the array size is less than 1
+  # the next matcher in the CSV will be tested.
+  def obtain_items(column_value, nuix_case)
+    items = nuix_case.search(column_value)
+    return items
+  end
 
-	# Should return a descriptive string of what this matcher is.
-	def to_s
-		return "My Custom Matcher"
-	end
+  # Should return a descriptive string of what this matcher is.
+  def to_s
+    return "My Custom Matcher"
+  end
 end
 ```
 
@@ -114,35 +114,35 @@ To create a custom annotater you must create a class which derives from the `CSV
 
 ```ruby
 class MyCustomAnnotater < CSVAnnotaterBase
-	# Regex used to identify this annotaters column header
-	@@header_regex = /^MyCustomAnnotater$/
+  # Regex used to identify this annotaters column header
+  HEADER_REGEX = /^MyCustomAnnotater$/
 
-	# When annotater is created it is provided header and column index.
-	# @col_index must be set to the column index to function properly later
-	def initialize(header,col_index)
-		@col_index = col_index
-	end
+  # When annotater is created it is provided header and column index.
+  # @col_index must be set to the column index to function properly later
+  def initialize(utilities, header, col_index)
+    super(utilities, header, col_index)
+  end
 
-	# This method will be called to determine if it is the appropriate matcher
-	# for a given column.  This is where the header is analyzed to determine if
-	# this matcher is appropriate.  Usually checking the regex above against
-	# the header name is enough.
-	def self.is_your_header?(header)
-		return header =~ @@header_regex
-	end
+  # This method will be called to determine if it is the appropriate matcher
+  # for a given column.  This is where the header is analyzed to determine if
+  # this matcher is appropriate.  Usually checking the regex above against
+  # the header name is enough.
+  def self.your_header?(header)
+    return header =~ HEADER_REGEX
+  end
 
-	# This method is called when a given row has a value for the given column.
-	# This methods receives the items yielded by a matcher, the given column's value
-	# and the nuix_case being operated on.  This method is where the actual annotation
-	# actions occur.
-	def perform_annotation(items,column_value,nuix_case)
-		$utilities.getBulkAnnotater.addTag(column_value,items)
-	end
+  # This method is called when a given row has a value for the given column.
+  # This methods receives the items yielded by a matcher, the given column's value
+  # and the nuix_case being operated on.  This method is where the actual annotation
+  # actions occur.
+  def perform_annotation(items, column_value, nuix_case)
+    utilities.getBulkAnnotater.addTag(column_value,items)
+  end
 
-	# Should return a descriptive string of what this annotater is.
-	def to_s
-		return "My Custom Annotater"
-	end
+  # Should return a descriptive string of what this annotater is.
+  def to_s
+    return "My Custom Annotater"
+  end
 end
 ```
 
