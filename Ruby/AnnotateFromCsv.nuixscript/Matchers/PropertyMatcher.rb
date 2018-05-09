@@ -2,7 +2,7 @@
 class PropertyMatcher < CSVMatcherBase
   # Regular expression used to recognize columns handled by this matcher
   @@header_regex = /^MatchProperty:(.*)$/
-  
+
   @property_name = nil
 
   def initialize(header, col_index)

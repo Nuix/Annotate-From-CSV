@@ -159,7 +159,7 @@ class AnnotationCSVParser
       end
       row_index += 1
     end
-    
+
     # For each non-header row, let the matcher and annotater instances we constructed earlier
     # do their work based on the data present in the given row
     data.each_with_index do |row_values, row_index|

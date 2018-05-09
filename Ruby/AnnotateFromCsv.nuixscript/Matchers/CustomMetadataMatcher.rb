@@ -2,7 +2,7 @@
 class CustomMetadataMatcher < CSVMatcherBase
   # Regular expression used to recognize columns handled by this matcher
   @@header_regex = /^MatchCustomMetadata:(.*)$/
-  
+
   @field_name = nil
 
   def initialize(header, col_index)
