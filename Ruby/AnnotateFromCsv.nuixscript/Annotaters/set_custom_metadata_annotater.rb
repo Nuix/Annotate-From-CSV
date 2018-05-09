@@ -38,7 +38,7 @@ class SetCustomMetadataAnnotater < CSVAnnotaterBase
       value = column_value.to_f
     elsif column_value =~ @@bool_regex
       value_type = 'boolean'
-      value = column_value.strip.downcase == 'true'
+      value = column_value.strip.casecmp('true').zero?
     else
       value_type = 'text'
       value = column_value
