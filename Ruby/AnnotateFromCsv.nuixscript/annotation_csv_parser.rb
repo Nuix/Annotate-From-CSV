@@ -62,26 +62,26 @@ class AnnotationCSVParser
 
   # Allows code to listen for progress updates
   def self.when_progress_updated(&block)
-    @@progress_updated_callback = block
+    @progress_updated_callback = block
   end
 
   # Broadcasts progress updates to callback if registered
   def self.update_progress(current, total)
-    return if @@progress_updated_callback.nil?
+    return if @progress_updated_callback.nil?
 
-    @@progress_updated_callback.call(current, total)
+    @progress_updated_callback.call(current, total)
   end
 
   # Allows code to listen for log messages
   def self.when_message_logged(&block)
-    @@message_logged_callback = block
+    @message_logged_callback = block
   end
 
   # Broadcasts log messages to callback if registered
   def self.log(message)
-    return if @@message_logged_callback.nil?
+    return if @message_logged_callback.nil?
 
-    @@message_logged_callback.call(message)
+    @message_logged_callback.call(message)
   end
 
   # Returns all defined matchers using reflection to locate all classes
