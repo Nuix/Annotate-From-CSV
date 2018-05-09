@@ -53,9 +53,9 @@ if dialog.getDialogResult == true
     # Connect up parser callback so progress updates are reported to the
     # progress dialog
     AnnotationCSVParser.when_progress_updated do |current, total|
-      pd.setMainStatus("Processing row #{current+1}/#{total}")
-      pd.logMessage("===== Processing row #{current+1}/#{total} =====")
-      pd.setMainProgress(current+1, total)
+      pd.setMainStatus("Processing row #{current + 1}/#{total}")
+      pd.logMessage("===== Processing row #{current + 1}/#{total} =====")
+      pd.setMainProgress(current + 1, total)
     end
 
     # Begin processing the CSV

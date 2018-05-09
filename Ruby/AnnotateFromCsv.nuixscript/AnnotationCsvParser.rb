@@ -38,7 +38,7 @@ class AnnotationCSVParser
 
     # If we obtained items, run each annotater
     if items.nil?
-      AnnotationCSVParser.log "Row #{row_index+1}: No matcher columns had a value or yielded any items"
+      AnnotationCSVParser.log "Row #{row_index + 1}: No matcher columns had a value or yielded any items"
     else
       # Some matcher was able to give us some items
       if @remove_excluded_items
