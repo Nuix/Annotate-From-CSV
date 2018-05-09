@@ -1,8 +1,8 @@
 # Sets/overwrites custom meadata field.  Field name based on value provided in header and
 # value written to that field based on CSV row value
 class SetCustomMetadataAnnotater < CSVAnnotaterBase
-  def initialize(header, col_index)
-    super(header, col_index)
+  def initialize(utilities, header, col_index)
+    super(utilities, header, col_index)
 
     @field_name = header.gsub(@@header_regex, '\\1')
   end
@@ -36,7 +36,7 @@ class SetCustomMetadataAnnotater < CSVAnnotaterBase
       value_type = 'text'
       value = column_value
     end
-    $utilities.getBulkAnnotater.putCustomMetadata(@field_name, value, items, value_type, 'user', nil, nil)
+    utilities.getBulkAnnotater.putCustomMetadata(@field_name, value, items, value_type, 'user', nil, nil)
   end
 
   def to_s

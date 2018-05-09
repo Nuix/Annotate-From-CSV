@@ -11,7 +11,7 @@ class ExcludeAnnotater < CSVAnnotaterBase
     # Only exclude items if column had a value
     return if column_value.strip.empty?
 
-    $utilities.getBulkAnnotater.exclude(column_value, items)
+    utilities.getBulkAnnotater.exclude(column_value, items)
   end
 
   def to_s

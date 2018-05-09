@@ -11,7 +11,7 @@ class QueryFamilyMatcher < CSVMatcherBase
     # Run search based on given column value
     items = nuix_case.search(column_value)
     # Resolve to families
-    $utilities.getItemUtility.findFamilies(items)
+    utilities.getItemUtility.findFamilies(items)
   end
 
   def to_s

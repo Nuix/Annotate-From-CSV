@@ -12,7 +12,7 @@ java_import 'com.nuix.nx.digest.DigestHelper'
 java_import 'com.nuix.nx.controls.models.Choice'
 
 LookAndFeelHelper.setWindowsIfMetal
-NuixConnection.setUtilities($utilities)
+NuixConnection.setUtilities(utilities)
 NuixConnection.setCurrentNuixVersion(NUIX_VERSION)
 
 # Load dependencies
@@ -59,7 +59,7 @@ if dialog.getDialogResult == true
     end
 
     # Begin processing the CSV
-    AnnotationCSVParser.process_csv(input_csv)
+    AnnotationCSVParser.process_csv(input_csv, current_case, utilities)
 
     # Set progress dialog to a completed state
     pd.setCompleted

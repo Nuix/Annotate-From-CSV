@@ -14,7 +14,7 @@ class RemoveTagsAnnotater < CSVAnnotaterBase
     # Remove each tag (if any)
     tags.each do |tag|
       AnnotationCSVParser.log("Removing tag #{tag} from #{items.size} items")
-      $utilities.getBulkAnnotater.removeTag(tag, items)
+      utilities.getBulkAnnotater.removeTag(tag, items)
     end
   end
 

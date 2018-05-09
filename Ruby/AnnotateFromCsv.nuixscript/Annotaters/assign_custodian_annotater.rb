@@ -11,7 +11,7 @@ class AssignCustodianAnnotater < CSVAnnotaterBase
     # Only assign custodian if column had a value
     return if column_value.strip.empty?
 
-    $utilities.getBulkAnnotater.assignCustodian(column_value, items)
+    utilities.getBulkAnnotater.assignCustodian(column_value, items)
   end
 
   def to_s

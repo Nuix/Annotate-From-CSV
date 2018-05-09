@@ -11,7 +11,7 @@ class QueryDescendantMatcher < CSVMatcherBase
     # Run search based on given column value
     items = nuix_case.search(column_value)
     # Resolve to descendants
-    $utilities.getItemUtility.findDescendants(items)
+    utilities.getItemUtility.findDescendants(items)
   end
 
   def to_s

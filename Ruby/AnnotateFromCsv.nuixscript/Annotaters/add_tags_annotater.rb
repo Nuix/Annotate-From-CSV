@@ -14,7 +14,7 @@ class AddTagsAnnotater < CSVAnnotaterBase
     # Apply each tag (if any)
     tags.each do |tag|
       AnnotationCSVParser.log("Adding tag #{tag} to #{items.size} items")
-      $utilities.getBulkAnnotater.addTag(tag, items)
+      utilities.getBulkAnnotater.addTag(tag, items)
     end
   end
 

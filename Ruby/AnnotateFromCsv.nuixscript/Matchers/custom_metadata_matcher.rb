@@ -1,7 +1,7 @@
 # Matches items based on a value in a specified custom metadata field
 class CustomMetadataMatcher < CSVMatcherBase
-  def initialize(header, col_index)
-    super(header, col_index)
+  def initialize(utilities, header, col_index)
+    super(utilities, header, col_index)
 
     @field_name = header.gsub(@@header_regex, '\\1')
   end

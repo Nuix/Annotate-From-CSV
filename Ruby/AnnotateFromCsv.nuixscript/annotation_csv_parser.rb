@@ -2,18 +2,22 @@ require 'csv'
 
 # Base class for matchers
 class CSVMatcherBase
+  attr_reader :utilities
   attr_reader :col_index
 
-  def initialize(_header, col_index)
+  def initialize(utilities, _header, col_index)
+    @utilities = utilities
     @col_index = col_index
   end
 end
 
 # Base class for annotaters
 class CSVAnnotaterBase
+  attr_reader :utilities
   attr_reader :col_index
 
-  def initialize(_header, col_index)
+  def initialize(utilities, _header, col_index)
+    @utilities = utilities
     @col_index = col_index
   end
 end
@@ -98,7 +102,7 @@ class AnnotationCSVParser
 
   # Given array of headers, constructs appropriate matchers and annotaters for which there
   # is a matcher or annotater that accepts responsibility
-  def self.build_from_headers(headers)
+  def self.build_from_headers(headers, utilities)
     instance = new
 
     # Log the headers we found
@@ -113,7 +117,7 @@ class AnnotationCSVParser
       all_matchers.each do |matcher_class|
         next unless matcher_class.your_header?(header)
 
-        matcher_instance = matcher_class.new(header, header_index)
+        matcher_instance = matcher_class.new(utilities, header, header_index)
         instance.matchers << matcher_instance
         AnnotationCSVParser.log "[#{header_index}] Adding Matcher: #{matcher_instance}"
         break
@@ -126,7 +130,7 @@ class AnnotationCSVParser
       all_annotaters.each do |annotater_class|
         next unless annotater_class.your_header?(header)
 
-        annotater_instance = annotater_class.new(header, header_index)
+        annotater_instance = annotater_class.new(utilities, header, header_index)
         instance.annotaters << annotater_instance
         AnnotationCSVParser.log "[#{header_index}] Adding Annotater: #{annotater_instance}"
         break
@@ -141,10 +145,7 @@ class AnnotationCSVParser
   end
 
   # Entry point for processing a CSV into a series of annotation operations
-  def self.process_csv(csv_path, nuix_case = nil)
-    # If caller did not provide a Nuix Case object, we will try to use $current_case
-    nuix_case = $current_case if nuix_case.nil?
-
+  def self.process_csv(csv_path, nuix_case, utilities)
     headers = nil
     parser = nil
     data = []
@@ -154,7 +155,7 @@ class AnnotationCSVParser
     CSV.foreach(csv_path) do |row|
       if headers.nil?
         headers = row.reject(&:nil?).map(&:strip).reject(&:empty?)
-        parser = build_from_headers(headers)
+        parser = build_from_headers(headers, utilities)
       else
         data << row
       end
