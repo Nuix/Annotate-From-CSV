@@ -10,7 +10,7 @@ class QueryTopLevelMatcher < CSVMatcherBase
   # Returns true if this matcher should take ownership of a given column based upon
   # that columns header value
   def self.is_your_header?(header)
-    return header =~ @@header_regex
+    header =~ @@header_regex
   end
 
   # This method returns the items this matcher matches against given a particular row's value
@@ -18,10 +18,10 @@ class QueryTopLevelMatcher < CSVMatcherBase
     # Run search based on given column value
     items = nuix_case.search(column_value)
     # Resolve to top level items
-    return $utilities.getItemUtility.findTopLevelItems(items)
+    $utilities.getItemUtility.findTopLevelItems(items)
   end
 
   def to_s
-    return "Query Top Level Matcher"
+    "Query Top Level Matcher"
   end
 end

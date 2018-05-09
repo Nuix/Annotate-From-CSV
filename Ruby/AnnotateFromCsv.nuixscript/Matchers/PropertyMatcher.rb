@@ -13,7 +13,7 @@ class PropertyMatcher < CSVMatcherBase
   # Returns true if this matcher should take ownership of a given column based upon
   # that columns header value
   def self.is_your_header?(header)
-    return header =~ @@header_regex
+    header =~ @@header_regex
   end
 
   # This method returns the items this matcher matches against given a particular row's value
@@ -28,6 +28,6 @@ class PropertyMatcher < CSVMatcherBase
   end
 
   def to_s
-    return "Property Matcher"
+    "Property Matcher"
   end
 end

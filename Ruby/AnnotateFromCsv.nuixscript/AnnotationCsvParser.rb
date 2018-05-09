@@ -133,7 +133,7 @@ class AnnotationCSVParser
     AnnotationCSVParser.log("Located #{instance.matchers.size} matchers")
     AnnotationCSVParser.log("Located #{instance.annotaters.size} annotaters")
 
-    return instance
+    instance
   end
 
   # Entry point for processing a CSV into a series of annotation operations

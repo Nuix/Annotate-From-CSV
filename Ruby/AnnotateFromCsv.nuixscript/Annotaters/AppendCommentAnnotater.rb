@@ -9,7 +9,7 @@ class AppendCommentAnnotater < CSVAnnotaterBase
   # Returns true if this annotater should take ownership of a given column based upon
   # that columns header value
   def self.is_your_header?(header)
-    return header =~ @@header_regex
+    header =~ @@header_regex
   end
 
   # This method takes the items found by some matcher and performs the relevant annotation on them
@@ -23,6 +23,6 @@ class AppendCommentAnnotater < CSVAnnotaterBase
   end
 
   def to_s
-    return "Append Comment"
+    "Append Comment"
   end
 end
