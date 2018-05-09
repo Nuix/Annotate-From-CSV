@@ -2,7 +2,7 @@
 class AddTagsAnnotater < CSVAnnotaterBase
   @@header_regex = /^AddTags$/
 
-  def initialize(header,col_index)
+  def initialize(header, col_index)
     @col_index = col_index
   end
 
@@ -13,14 +13,14 @@ class AddTagsAnnotater < CSVAnnotaterBase
   end
 
   # This method takes the items found by some matcher and performs the relevant annotation on them
-  def perform_annotation(items,column_value,nuix_case)
+  def perform_annotation(items, column_value, nuix_case)
     # Split column value by ;, trim whitespace and dump empty entries
     # to get the series of tags to be applied
     tags = column_value.split(";").map{|t|t.strip}.reject{|t|t.empty?}
     # Apply each tag (if any)
     tags.each do |tag|
       AnnotationCSVParser.log("Adding tag #{tag} to #{items.size} items")
-      $utilities.getBulkAnnotater.addTag(tag,items)
+      $utilities.getBulkAnnotater.addTag(tag, items)
     end
   end
 

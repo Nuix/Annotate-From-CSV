@@ -2,7 +2,7 @@
 class SetCommentAnnotater < CSVAnnotaterBase
   @@header_regex = /^SetComment$/
 
-  def initialize(header,col_index)
+  def initialize(header, col_index)
     @col_index = col_index
   end
 
@@ -13,7 +13,7 @@ class SetCommentAnnotater < CSVAnnotaterBase
   end
 
   # This method takes the items found by some matcher and performs the relevant annotation on them
-  def perform_annotation(items,column_value,nuix_case)
+  def perform_annotation(items, column_value, nuix_case)
     # Set comment if column had a value
     if !column_value.strip.empty?
       items.each do |item|

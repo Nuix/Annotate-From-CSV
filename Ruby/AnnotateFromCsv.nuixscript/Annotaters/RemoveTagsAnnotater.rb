@@ -2,7 +2,7 @@
 class RemoveTagsAnnotater < CSVAnnotaterBase
   @@header_regex = /^RemoveTags$/
 
-  def initialize(header,col_index)
+  def initialize(header, col_index)
     @col_index = col_index
   end
 
@@ -13,14 +13,14 @@ class RemoveTagsAnnotater < CSVAnnotaterBase
   end
 
   # This method takes the items found by some matcher and performs the relevant annotation on them
-  def perform_annotation(items,column_value,nuix_case)
+  def perform_annotation(items, column_value, nuix_case)
     # Split column value by ;, trim whitespace and dump empty entries
     # to get the series of tags to be applied
     tags = column_value.split(";").map{|t|t.strip}
     # Remove each tag (if any)
     tags.each do |tag|
       AnnotationCSVParser.log("Removing tag #{tag} from #{items.size} items")
-      $utilities.getBulkAnnotater.removeTag(tag,items)
+      $utilities.getBulkAnnotater.removeTag(tag, items)
     end
   end
 

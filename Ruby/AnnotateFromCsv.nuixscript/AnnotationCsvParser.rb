@@ -23,13 +23,13 @@ class AnnotationCSVParser
   end
 
   # Processes a single record from the CSV
-  def process_record(record_values,row_index,nuix_case)
+  def process_record(record_values, row_index, nuix_case)
     # Determine matcher for this row
     items = nil
     matchers.each do |matcher|
       column_value = record_values[matcher.col_index] || ""
       if !column_value.strip.empty?
-        items = matcher.obtain_items(column_value,nuix_case)
+        items = matcher.obtain_items(column_value, nuix_case)
         if items.size > 0
           break
         end
@@ -50,7 +50,7 @@ class AnnotationCSVParser
       else
         annotaters.each do |annotater|
           column_value = record_values[annotater.col_index] || ""
-          annotater.perform_annotation(items,column_value,nuix_case)
+          annotater.perform_annotation(items, column_value, nuix_case)
         end
       end
     end
@@ -62,9 +62,9 @@ class AnnotationCSVParser
   end
 
   # Broadcasts progress updates to callback if registered
-  def self.update_progress(current,total)
+  def self.update_progress(current, total)
     if !@@progress_updated_callback.nil?
-      @@progress_updated_callback.call(current,total)
+      @@progress_updated_callback.call(current, total)
     end
   end
 
@@ -105,10 +105,10 @@ class AnnotationCSVParser
 
     # Build matchers
     AnnotationCSVParser.log "Locating matchers..."
-    headers.each_with_index do |header,header_index|
+    headers.each_with_index do |header, header_index|
       all_matchers.each do |matcher_class|
         if matcher_class.is_your_header?(header)
-          matcher_instance = matcher_class.new(header,header_index)
+          matcher_instance = matcher_class.new(header, header_index)
           instance.matchers << matcher_instance
           AnnotationCSVParser.log "[#{header_index}] Adding Matcher: #{matcher_instance}"
           break
@@ -118,10 +118,10 @@ class AnnotationCSVParser
 
     # Build annotaters
     AnnotationCSVParser.log "Locating annotaters..."
-    headers.each_with_index do |header,header_index|
+    headers.each_with_index do |header, header_index|
       all_annotaters.each do |annotater_class|
         if annotater_class.is_your_header?(header)
-          annotater_instance = annotater_class.new(header,header_index)
+          annotater_instance = annotater_class.new(header, header_index)
           instance.annotaters << annotater_instance
           AnnotationCSVParser.log "[#{header_index}] Adding Annotater: #{annotater_instance}"
           break
@@ -137,7 +137,7 @@ class AnnotationCSVParser
   end
 
   # Entry point for processing a CSV into a series of annotation operations
-  def self.process_csv(csv_path,nuix_case=nil)
+  def self.process_csv(csv_path, nuix_case=nil)
     # If caller did not provide a Nuix Case object, we will try to use $current_case
     if nuix_case.nil?
       nuix_case = $current_case
@@ -162,9 +162,9 @@ class AnnotationCSVParser
     
     # For each non-header row, let the matcher and annotater instances we constructed earlier
     # do their work based on the data present in the given row
-    data.each_with_index do |row_values,row_index|
-      update_progress(row_index,data.size)
-      parser.process_record(row_values,row_index,nuix_case)
+    data.each_with_index do |row_values, row_index|
+      update_progress(row_index, data.size)
+      parser.process_record(row_values, row_index, nuix_case)
     end
   end
 end
@@ -172,8 +172,8 @@ end
 # With the classes defined above, we can now dynamically load all the matchers and annotaters
 # allowing for easy drop in functionality
 script_directory ||= File.dirname(__FILE__)
-matcher_class_files = Dir.glob("#{script_directory.gsub("\\","/")}/Matchers/**/*.rb")
-annotater_class_files = Dir.glob("#{script_directory.gsub("\\","/")}/Annotaters/**/*.rb")
+matcher_class_files = Dir.glob("#{script_directory.gsub("\\", "/")}/Matchers/**/*.rb")
+annotater_class_files = Dir.glob("#{script_directory.gsub("\\", "/")}/Annotaters/**/*.rb")
 matcher_class_files.each do |matcher_class_file|
   puts "Loading matcher: #{File.basename(matcher_class_file)}"
   load matcher_class_file

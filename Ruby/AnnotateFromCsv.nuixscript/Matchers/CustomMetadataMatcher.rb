@@ -5,9 +5,9 @@ class CustomMetadataMatcher < CSVMatcherBase
   
   @field_name = nil
 
-  def initialize(header,col_index)
+  def initialize(header, col_index)
     @col_index = col_index
-    @field_name = header.gsub(@@header_regex,"\\1")
+    @field_name = header.gsub(@@header_regex, "\\1")
   end
 
   # Returns true if this matcher should take ownership of a given column based upon
@@ -17,7 +17,7 @@ class CustomMetadataMatcher < CSVMatcherBase
   end
 
   # This method returns the items this matcher matches against given a particular row's value
-  def obtain_items(column_value,nuix_case)
+  def obtain_items(column_value, nuix_case)
     # Get intial items which match a custom metadata search
     items = nuix_case.search("custom-metadata:\"#{@field_name}\":\"#{column_value}\"")
     # Further validate each hit actually matches

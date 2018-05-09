@@ -3,7 +3,7 @@ class GUIDMatcher < CSVMatcherBase
   # Regular expression used to recognize columns handled by this matcher
   @@header_regex = /^MatchGUID$/
 
-  def initialize(header,col_index)
+  def initialize(header, col_index)
     @col_index = col_index
   end
 
@@ -14,7 +14,7 @@ class GUIDMatcher < CSVMatcherBase
   end
 
   # This method returns the items this matcher matches against given a particular row's value
-  def obtain_items(column_value,nuix_case)
+  def obtain_items(column_value, nuix_case)
     # Run a search for the given GUID
     return nuix_case.search("guid:#{column_value}")
   end

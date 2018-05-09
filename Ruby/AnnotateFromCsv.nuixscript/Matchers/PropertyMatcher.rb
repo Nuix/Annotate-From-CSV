@@ -5,9 +5,9 @@ class PropertyMatcher < CSVMatcherBase
   
   @property_name = nil
 
-  def initialize(header,col_index)
+  def initialize(header, col_index)
     @col_index = col_index
-    @property_name = header.gsub(@@header_regex,"\\1")
+    @property_name = header.gsub(@@header_regex, "\\1")
   end
 
   # Returns true if this matcher should take ownership of a given column based upon
@@ -17,7 +17,7 @@ class PropertyMatcher < CSVMatcherBase
   end
 
   # This method returns the items this matcher matches against given a particular row's value
-  def obtain_items(column_value,nuix_case)
+  def obtain_items(column_value, nuix_case)
     # Run a search for the given property
     items = nuix_case.search("properties:\"#{@property_name}:#{column_value}\"")
     # Further refine matches to only items where the given property contains the exact

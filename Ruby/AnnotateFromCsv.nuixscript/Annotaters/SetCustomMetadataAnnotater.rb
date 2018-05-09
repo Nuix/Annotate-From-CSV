@@ -8,9 +8,9 @@ class SetCustomMetadataAnnotater < CSVAnnotaterBase
 
   @field_name = nil
 
-  def initialize(header,col_index)
+  def initialize(header, col_index)
     @col_index = col_index
-    @field_name = header.gsub(@@header_regex,"\\1")
+    @field_name = header.gsub(@@header_regex, "\\1")
   end
 
   # Returns true if this annotater should take ownership of a given column based upon
@@ -20,7 +20,7 @@ class SetCustomMetadataAnnotater < CSVAnnotaterBase
   end
 
   # This method takes the items found by some matcher and performs the relevant annotation on them
-  def perform_annotation(items,column_value,nuix_case)
+  def perform_annotation(items, column_value, nuix_case)
     # Only apply a value if the column was not empty
     if !column_value.strip.empty?
       # Analyze the column value to try and determine the data type
@@ -41,7 +41,7 @@ class SetCustomMetadataAnnotater < CSVAnnotaterBase
         value_type = "text"
         value = column_value
       end
-      $utilities.getBulkAnnotater.putCustomMetadata(@field_name,value,items,value_type,"user",nil,nil)
+      $utilities.getBulkAnnotater.putCustomMetadata(@field_name, value, items, value_type, "user", nil, nil)
     end
   end
 

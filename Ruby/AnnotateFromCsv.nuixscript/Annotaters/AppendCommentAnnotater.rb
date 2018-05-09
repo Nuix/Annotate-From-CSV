@@ -2,7 +2,7 @@
 class AppendCommentAnnotater < CSVAnnotaterBase
   @@header_regex = /^AppendComment$/
 
-  def initialize(header,col_index)
+  def initialize(header, col_index)
     @col_index = col_index
   end
 
@@ -13,7 +13,7 @@ class AppendCommentAnnotater < CSVAnnotaterBase
   end
 
   # This method takes the items found by some matcher and performs the relevant annotation on them
-  def perform_annotation(items,column_value,nuix_case)
+  def perform_annotation(items, column_value, nuix_case)
     # Only append comment if column contained a value
     if !column_value.strip.empty?
       items.each do |item|

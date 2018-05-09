@@ -2,7 +2,7 @@
 class ExcludeAnnotater < CSVAnnotaterBase
   @@header_regex = /^Exclude$/
 
-  def initialize(header,col_index)
+  def initialize(header, col_index)
     @col_index = col_index
   end
 
@@ -13,10 +13,10 @@ class ExcludeAnnotater < CSVAnnotaterBase
   end
 
   # This method takes the items found by some matcher and performs the relevant annotation on them
-  def perform_annotation(items,column_value,nuix_case)
+  def perform_annotation(items, column_value, nuix_case)
     # Only exclude items if column had a value
     if !column_value.strip.empty?
-      $utilities.getBulkAnnotater.exclude(column_value,items)
+      $utilities.getBulkAnnotater.exclude(column_value, items)
     end
   end
 

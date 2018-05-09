@@ -1,6 +1,6 @@
 # Bootstrap the Nx library
 script_directory = File.dirname(__FILE__)
-require File.join(script_directory,"Nx.jar")
+require File.join(script_directory, "Nx.jar")
 java_import "com.nuix.nx.NuixConnection"
 java_import "com.nuix.nx.LookAndFeelHelper"
 java_import "com.nuix.nx.dialogs.ChoiceDialog"
@@ -16,13 +16,13 @@ NuixConnection.setUtilities($utilities)
 NuixConnection.setCurrentNuixVersion(NUIX_VERSION)
 
 # Load dependencies
-load File.join(script_directory,"AnnotationCsvParser.rb")
+load File.join(script_directory, "AnnotationCsvParser.rb")
 
 # Construct settings dialog
 dialog = TabbedCustomDialog.new("Annotate from CSV")
-dialog.setHelpFile(File.join(script_directory,"Readme.html"))
-main_tab = dialog.addTab("main_tab","Main")
-main_tab.appendOpenFileChooser("input_csv","Input CSV","Comma Separated Values","csv")
+dialog.setHelpFile(File.join(script_directory, "Readme.html"))
+main_tab = dialog.addTab("main_tab", "Main")
+main_tab.appendOpenFileChooser("input_csv", "Input CSV", "Comma Separated Values", "csv")
 
 # Display settings dialog
 dialog.display
@@ -52,10 +52,10 @@ if dialog.getDialogResult == true
 
     # Connect up parser callback so progress updates are reported to the
     # progress dialog
-    AnnotationCSVParser.when_progress_updated do |current,total|
+    AnnotationCSVParser.when_progress_updated do |current, total|
       pd.setMainStatus("Processing row #{current+1}/#{total}")
       pd.logMessage("===== Processing row #{current+1}/#{total} =====")
-      pd.setMainProgress(current+1,total)
+      pd.setMainProgress(current+1, total)
     end
 
     # Begin processing the CSV
