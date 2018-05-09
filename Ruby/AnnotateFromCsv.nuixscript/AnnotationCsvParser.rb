@@ -137,7 +137,7 @@ class AnnotationCSVParser
   end
 
   # Entry point for processing a CSV into a series of annotation operations
-  def self.process_csv(csv_path, nuix_case=nil)
+  def self.process_csv(csv_path, nuix_case = nil)
     # If caller did not provide a Nuix Case object, we will try to use $current_case
     if nuix_case.nil?
       nuix_case = $current_case
