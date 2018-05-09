@@ -15,7 +15,7 @@ class SetCommentAnnotater < CSVAnnotaterBase
   # This method takes the items found by some matcher and performs the relevant annotation on them
   def perform_annotation(items, column_value, nuix_case)
     # Set comment if column had a value
-    if !column_value.strip.empty?
+    unless column_value.strip.empty?
       items.each do |item|
         item.setComment(column_value)
       end

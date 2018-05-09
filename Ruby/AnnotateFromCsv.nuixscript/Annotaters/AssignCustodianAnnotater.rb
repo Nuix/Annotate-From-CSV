@@ -15,7 +15,7 @@ class AssignCustodianAnnotater < CSVAnnotaterBase
   # This method takes the items found by some matcher and performs the relevant annotation on them
   def perform_annotation(items, column_value, nuix_case)
     # Only assign custodian if column had a value
-    if !column_value.strip.empty?
+    unless column_value.strip.empty?
       $utilities.getBulkAnnotater.assignCustodian(column_value, items)
     end
   end

@@ -22,7 +22,7 @@ class SetCustomMetadataAnnotater < CSVAnnotaterBase
   # This method takes the items found by some matcher and performs the relevant annotation on them
   def perform_annotation(items, column_value, nuix_case)
     # Only apply a value if the column was not empty
-    if !column_value.strip.empty?
+    unless column_value.strip.empty?
       # Analyze the column value to try and determine the data type
       # so that we can apply the custom metadata as a user would expect
       # for example the string "1234" gets stored as the integer 1234
