@@ -9,7 +9,7 @@ class QueryFamilyMatcher < CSVMatcherBase
 
   # Returns true if this matcher should take ownership of a given column based upon
   # that columns header value
-  def self.is_your_header?(header)
+  def self.your_header?(header)
     header =~ @@header_regex
   end
 

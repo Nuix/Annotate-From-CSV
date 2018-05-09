@@ -103,7 +103,7 @@ class AnnotationCSVParser
     AnnotationCSVParser.log 'Locating matchers...'
     headers.each_with_index do |header, header_index|
       all_matchers.each do |matcher_class|
-        next unless matcher_class.is_your_header?(header)
+        next unless matcher_class.your_header?(header)
 
         matcher_instance = matcher_class.new(header, header_index)
         instance.matchers << matcher_instance
@@ -116,7 +116,7 @@ class AnnotationCSVParser
     AnnotationCSVParser.log 'Locating annotaters...'
     headers.each_with_index do |header, header_index|
       all_annotaters.each do |annotater_class|
-        next unless annotater_class.is_your_header?(header)
+        next unless annotater_class.your_header?(header)
 
         annotater_instance = annotater_class.new(header, header_index)
         instance.annotaters << annotater_instance

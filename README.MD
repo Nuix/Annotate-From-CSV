@@ -86,7 +86,7 @@ class MyCustomMatcher < CSVMatcherBase
 	# for a given column.  This is where the header is analyzed to determine if
 	# this matcher is appropriate.  Usually checking the regex above against
 	# the header name is enough.
-	def self.is_your_header?(header)
+	def self.your_header?(header)
 		return header =~ @@header_regex
 	end
 
@@ -127,7 +127,7 @@ class MyCustomAnnotater < CSVAnnotaterBase
 	# for a given column.  This is where the header is analyzed to determine if
 	# this matcher is appropriate.  Usually checking the regex above against
 	# the header name is enough.
-	def self.is_your_header?(header)
+	def self.your_header?(header)
 		return header =~ @@header_regex
 	end
 
