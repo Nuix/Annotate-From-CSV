@@ -42,7 +42,7 @@ class AnnotationCSVParser
     else
       # Some matcher was able to give us some items
       if @remove_excluded_items
-        items = items.reject{|i| i.isExcluded}
+        items = items.reject { |i| i.isExcluded }
       end
 
       if items.size < 1
@@ -83,13 +83,13 @@ class AnnotationCSVParser
   # Returns all defined matchers using reflection to locate all classes
   # derived from CSVMatcherBase class
   def self.all_matchers
-    ObjectSpace.each_object(Class).select{ |klass| klass < CSVMatcherBase }
+    ObjectSpace.each_object(Class).select { |klass| klass < CSVMatcherBase }
   end
 
   # Returns all defined annotaters using reflection to locate all classes
   # derived from CSVAnnotaterBase class
   def self.all_annotaters
-    ObjectSpace.each_object(Class).select{ |klass| klass < CSVAnnotaterBase }
+    ObjectSpace.each_object(Class).select { |klass| klass < CSVAnnotaterBase }
   end
 
   # Given array of headers, constructs appropriate matchers and annotaters for which there
@@ -152,7 +152,7 @@ class AnnotationCSVParser
     # matchers and annotaters.  All other rows we will store in an array for their later use.
     CSV.foreach(csv_path) do |row|
       if headers.nil?
-        headers = row.reject{|v|v.nil?}.map{|v|v.strip}.reject{|v|v.empty?}
+        headers = row.reject { |v| v.nil? }.map { |v| v.strip }.reject { |v|v.empty? }
         parser = build_from_headers(headers)
       else
         data << row
