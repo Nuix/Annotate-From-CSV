@@ -16,7 +16,7 @@ NuixConnection.setUtilities($utilities)
 NuixConnection.setCurrentNuixVersion(NUIX_VERSION)
 
 # Load dependencies
-load File.join(script_directory, 'AnnotationCsvParser.rb')
+load File.join(script_directory, 'annotation_csv_parser.rb')
 
 # Construct settings dialog
 dialog = TabbedCustomDialog.new('Annotate from CSV')

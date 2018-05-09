@@ -31,9 +31,7 @@ class AnnotationCSVParser
       next if column_value.empty?
 
       items = matcher.obtain_items(column_value, nuix_case)
-      unless items.empty?
-        break
-      end
+      break unless items.empty?
     end
 
     # If we obtained items, run each annotater
@@ -41,9 +39,7 @@ class AnnotationCSVParser
       AnnotationCSVParser.log "Row #{row_index + 1}: No matcher columns had a value or yielded any items"
     else
       # Some matcher was able to give us some items
-      if @remove_excluded_items
-        items = items.reject(&:excluded?)
-      end
+      items = items.reject(&:excluded?) if @remove_excluded_items
 
       if items.empty?
         AnnotationCSVParser.log 'After removing excluded items, 0 items remain, moving on...'
@@ -139,9 +135,7 @@ class AnnotationCSVParser
   # Entry point for processing a CSV into a series of annotation operations
   def self.process_csv(csv_path, nuix_case = nil)
     # If caller did not provide a Nuix Case object, we will try to use $current_case
-    if nuix_case.nil?
-      nuix_case = $current_case
-    end
+    nuix_case = $current_case if nuix_case.nil?
 
     headers = nil
     parser = nil
