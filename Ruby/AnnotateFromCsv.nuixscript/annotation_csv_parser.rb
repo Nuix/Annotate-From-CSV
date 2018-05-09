@@ -174,8 +174,8 @@ end
 # With the classes defined above, we can now dynamically load all the matchers and annotaters
 # allowing for easy drop in functionality
 script_directory ||= File.dirname(__FILE__)
-matcher_class_files = Dir.glob("#{script_directory.gsub('\\', '/')}/Matchers/**/*.rb")
-annotater_class_files = Dir.glob("#{script_directory.gsub('\\', '/')}/Annotaters/**/*.rb")
+matcher_class_files = Dir.glob("#{script_directory.tr('\\', '/')}/Matchers/**/*.rb")
+annotater_class_files = Dir.glob("#{script_directory.tr('\\', '/')}/Annotaters/**/*.rb")
 matcher_class_files.each do |matcher_class_file|
   puts "Loading matcher: #{File.basename(matcher_class_file)}"
   load matcher_class_file
