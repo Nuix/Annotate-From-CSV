@@ -10,6 +10,6 @@ cat,,,,,,,,,,Animals|TopLevel|CatOrDog,Animals|Garfield,,,,,Cat
 ,,,,,,,DOC-000000002,,,DocIDMatch,,,,,,
 ,,,,,,,,Jan Rogers,,PropertyMatch,,Jan Rogers,,,,
 ,,,,,,,,,Cat,CustomMetadataMatch,,,,,,
--flag:audited,,,,,,,,,,Excluded,,,Immaterial,,,
+NOT flag:audited,,,,,,,,,,Excluded,,,Immaterial,,,
 cat OR dog,,,,,,,,,,,,,,This is a test comment,,
 cat OR dog,,,,,,,,,,,,,,,This is an appended comment,
