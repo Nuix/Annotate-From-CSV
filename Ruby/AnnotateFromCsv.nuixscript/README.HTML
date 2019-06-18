@@ -1,0 +1,270 @@
+<doctype html>
+<html>
+<head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/3.0.1/github-markdown.min.css">
+<style>
+	.markdown-body {
+		box-sizing: border-box;
+		min-width: 200px;
+		max-width: 980px;
+		margin: 0 auto;
+		padding: 45px;
+	}
+
+	@media (max-width: 767px) {
+		.markdown-body {
+			padding: 15px;
+		}
+	}
+</style>
+</head>
+<body class="markdown-body">
+<h1>Annotate from CSV</h1>
+
+<p><a href="http://www.apache.org/licenses/LICENSE-2.0"><img src="https://img.shields.io/badge/License-Apache%202.0-blue.svg" alt="License"></a> <img src="https://img.shields.io/badge/Script%20Tested%20in%20Nuix-7.8-green.svg" alt="This script was last tested in Nuix 7.8"></p>
+
+<p>View the GitHub project <a href="https://github.com/Nuix/Annotate-From-CSV">here</a> or download the latest release <a href="https://github.com/Nuix/Annotate-From-CSV/releases">here</a>.</p>
+
+<h1>Overview</h1>
+
+<p>This script allows you to apply annotations to a Nuix case based on a specially formatted input CSV.  Supported annotation operations include:</p>
+
+<ul>
+<li>Add/Remove Tags</li>
+<li>Set/Append Comments</li>
+<li>Exclude Items</li>
+<li>Assign Custodians</li>
+</ul>
+
+<h1>Getting Started</h1>
+
+<h2>Setup</h2>
+
+<p>Begin by downloading the latest release.  Extract the folder <code>AnnotateFromCsv.nuixscript</code> and its contents from the archive into your Nuix scripts directory.  In windows this directory is likely going to be either of the following:</p>
+
+<ul>
+<li><code>%appdata%\Nuix\Scripts</code> - User level script directory</li>
+<li><code>%programdata%\Nuix\Scripts</code> - System level script directory</li>
+</ul>
+
+<h2>Input CSV Format</h2>
+
+<p>The input CSV uses a series of specially named column headers that dictate how to find the items for a given row and what annotations to apply to those matched items for the row.</p>
+
+<h3>Matchers</h3>
+
+<p>For each row read from the input CSV, matcher columns are checked from left to right, using results from the first matcher column which is not empty and yields items when searched for.  Each input CSV must have at least one of the matcher columns, but is not required to have all matcher columns.</p>
+
+<p><strong>Note</strong>: Column headers are case sensitive!</p>
+
+<table><thead>
+<tr>
+<th>Column Header Format</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>MatchQuery</code></td>
+<td>Matches items which are responsive to the given search query.</td>
+</tr>
+<tr>
+<td><code>MatchQueryTopLevel</code></td>
+<td>Similar to <code>MatchQuery</code>, will run the given search query, but this matcher will yield the top level items of the search hits.</td>
+</tr>
+<tr>
+<td><code>MatchQueryFamilies</code></td>
+<td>Similar to <code>MatchQuery</code>, will run the given search query, but this matcher will yield the entire families of the search hits.</td>
+</tr>
+<tr>
+<td><code>MatchQueryDescendants</code></td>
+<td>Similar to <code>MatchQuery</code>, will run the given search query, but this matcher will yield only the descendants of the search hits.</td>
+</tr>
+<tr>
+<td><code>MatchGUID</code></td>
+<td>Matches items with the given GUID value.</td>
+</tr>
+<tr>
+<td><code>MatchKind</code></td>
+<td>Matches items with the given kind value.</td>
+</tr>
+<tr>
+<td><code>MatchMD5</code></td>
+<td>Matches items with the given MD5 value.</td>
+</tr>
+<tr>
+<td><code>MatchDocumentID</code></td>
+<td>Matches items with the given document id value.</td>
+</tr>
+<tr>
+<td><code>MatchProperty:&lt;NAME&gt;</code></td>
+<td>Matches items which have the property <code>&lt;NAME&gt;</code> with the given value.  Property matching is performed in two ways.  First by searching for <code>properties:&quot;&lt;NAME&gt;:&lt;COLUMN_VALUE&gt;&quot;</code>.  For each of the items responsive to that search, the items are further filtered to ensure that each item has the exact specified value for the specified property.</td>
+</tr>
+<tr>
+<td><code>MatchCustomMetadata:&lt;NAME&gt;</code></td>
+<td>Matches items which have the custom metadata field <code>&lt;NAME&gt;</code>.  Custom metadata matching is performed in two ways.  First by searching for <code>custom-metadata:&quot;&lt;NAME&gt;&quot;:&quot;&lt;COLUMN_VALUE&gt;&quot;</code>.  For each of the items responsive to that search, the items are further filtered to ensure that each item has the exact specified value.</td>
+</tr>
+</tbody></table>
+
+<h3>Annotaters</h3>
+
+<p>Once a matcher has obtained items for a given row, each annotater column is ran against the obtained items.</p>
+
+<p><strong>Note</strong>: Column headers are case sensitive!<br>
+<strong>Note</strong>: When an annotater column&#39;s value is empty for a given row, it will perform no action for that row!</p>
+
+<table><thead>
+<tr>
+<th>Column Header Format</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>AddTags</code></td>
+<td>Adds tags based on column value for the given row to matched items.  Multiple tags may be specified by using <code>;</code> as a delimiter.</td>
+</tr>
+<tr>
+<td><code>RemoveTags</code></td>
+<td>Removes tags based on column value for the given row from matched items.  Multiple tags may be specified by using <code>;</code> as a delimiter.</td>
+</tr>
+<tr>
+<td><code>AssignCustodian</code></td>
+<td>Assigns a custodian based on the column value for the given row to matched items.</td>
+</tr>
+<tr>
+<td><code>Exclude</code></td>
+<td>Excludes matched items into an exclusion named after the column value for the given row.</td>
+</tr>
+<tr>
+<td><code>AppendComment</code></td>
+<td>Appends a comment to any existing comments on the matched items based on the column value for the given row.  Will set the comment for any items which do not already have a comment.</td>
+</tr>
+<tr>
+<td><code>SetComment</code></td>
+<td>Sets a comment on matched items.  <strong>Note:</strong> that any existing comment on the matched items will be overwritten.</td>
+</tr>
+<tr>
+<td><code>SetCustomMetadata:&lt;NAME&gt;</code></td>
+<td>Sets a custom metadata on matched items with a field named <code>&lt;NAME&gt;</code> and a value based on the column value for the given row.  <strong>Note:</strong> that existing values in the specified custom metdata field on the matched items will be overwritten!</td>
+</tr>
+</tbody></table>
+
+<h1>Extending</h1>
+
+<p>Matchers and annotaters are defined by creating a class implementing the appropriate class and placing it in either the &quot;Matchers&quot; or &quot;Annotaters&quot; sub directory of the script.</p>
+
+<h2>Custom Matchers</h2>
+
+<p>To create a custom matcher you must create a class which derives from the <code>CSVMatcherBase</code> class and save it in the &quot;Matchers&quot; sub directory of the script.  The matcher class takes the basic form:</p>
+
+<pre lang="ruby"><code>class MyCustomMatcher &lt; CSVMatcherBase
+    # Regex used to identify this matchers column header
+    @@header_regex = /^MyCustomMatcher$/
+
+    # When matcher is created it is provided header and column index
+    # @col_index must be set to the column index to function properly later
+    def initialize(header,col_index)
+        @col_index = col_index
+    end
+
+    # This method will be called to determine if it is the appropriate matcher
+    # for a given column.  This is where the header is analyzed to determine if
+    # this matcher is appropriate.  Usually checking the regex above against
+    # the header name is enough.
+    def self.is_your_header?(header)
+        return header =~ @@header_regex
+    end
+
+    # This method is called when a given row has a value for the given column.
+    # This method recieves the given column&#39;s value and the nuix_case being operated on.
+    # This method should return a collection of items.  If the array size is less than 1
+    # the next matcher in the CSV will be tested.
+    def obtain_items(column_value,nuix_case)
+        items = nuix_case.search(column_value)
+        return items
+    end
+
+    # Should return a descriptive string of what this matcher is.
+    def to_s
+        return &quot;My Custom Matcher&quot;
+    end
+end
+</code></pre>
+
+<p>The best way to get a sense of how matchers work is to review some of the existing ones provided with the script in the &quot;Matchers&quot; sub directory.</p>
+
+<h2>Custom Annotaters</h2>
+
+<p>To create a custom annotater you must create a class which derives from the <code>CSVAnnotaterBase</code> class and save it in the &quot;Annotaters&quot; sub directory of the script.  The annotater class takes the basic form:</p>
+
+<pre lang="ruby"><code>class MyCustomAnnotater &lt; CSVAnnotaterBase
+    # Regex used to identify this annotaters column header
+    @@header_regex = /^MyCustomAnnotater$/
+
+    # When annotater is created it is provided header and column index.
+    # @col_index must be set to the column index to function properly later
+    def initialize(header,col_index)
+        @col_index = col_index
+    end
+
+    # This method will be called to determine if it is the appropriate annotater
+    # for a given column.  This is where the header is analyzed to determine if
+    # this annotater is appropriate.  Usually checking the regex above against
+    # the header name is enough.
+    def self.is_your_header?(header)
+        return header =~ @@header_regex
+    end
+
+    # This method is called when a given row has a value for the given column.
+    # This methods receives the items yielded by a matcher, the given column&#39;s value
+    # and the nuix_case being operated on.  This method is where the actual annotation
+    # actions occur.
+    def perform_annotation(items,column_value,nuix_case)
+        $utilities.getBulkAnnotater.addTag(column_value,items)
+    end
+
+    # Should return a descriptive string of what this annotater is.
+    def to_s
+        return &quot;My Custom Annotater&quot;
+    end
+end
+</code></pre>
+
+<p>The best way to get a sense of how annotaters work is to review some of the existing ones provided with the script in the &quot;Annotaters&quot; sub directory.</p>
+
+<h1>License</h1>
+
+<pre><code>Copyright 2019 Nuix
+
+Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+</code></pre>
+
+<h1>Icon Credit</h1>
+
+<pre><code>Silk icon set 1.3
+
+_________________________________________
+Mark James
+http://www.famfamfam.com/lab/icons/silk/
+_________________________________________
+
+This work is licensed under a
+Creative Commons Attribution 2.5 License.
+[ http://creativecommons.org/licenses/by/2.5/ ]
+
+This means you may use it for any purpose,
+and make any changes you like.
+All I ask is that you include a link back
+to this page in your credits.
+</code></pre>
+</body>
+</html>
