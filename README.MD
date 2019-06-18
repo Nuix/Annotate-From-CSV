@@ -1,7 +1,7 @@
 Annotate from CSV
 =================
 
-![Last tested in Nuix 7.4](https://img.shields.io/badge/Nuix-7.4-green.svg)
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](http://www.apache.org/licenses/LICENSE-2.0) ![This script was last tested in Nuix 7.8](https://img.shields.io/badge/Script%20Tested%20in%20Nuix-7.8-green.svg)
 
 View the GitHub project [here](https://github.com/Nuix/Annotate-From-CSV) or download the latest release [here](https://github.com/Nuix/Annotate-From-CSV/releases).
 
@@ -123,9 +123,9 @@ class MyCustomAnnotater < CSVAnnotaterBase
 		@col_index = col_index
 	end
 
-	# This method will be called to determine if it is the appropriate matcher
+	# This method will be called to determine if it is the appropriate annotater
 	# for a given column.  This is where the header is analyzed to determine if
-	# this matcher is appropriate.  Usually checking the regex above against
+	# this annotater is appropriate.  Usually checking the regex above against
 	# the header name is enough.
 	def self.is_your_header?(header)
 		return header =~ @@header_regex
@@ -151,7 +151,7 @@ The best way to get a sense of how annotaters work is to review some of the exis
 # License
 
 ```
-Copyright 2018 Nuix
+Copyright 2019 Nuix
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
