@@ -20,6 +20,7 @@ load File.join(script_directory,"AnnotationCsvParser.rb")
 # Construct settings dialog
 dialog = TabbedCustomDialog.new("Annotate from CSV")
 dialog.setHelpFile(File.join(script_directory,"README.HTML"))
+dialog.setHelpUrl("https://github.com/Nuix/Annotate-From-CSV")
 main_tab = dialog.addTab("main_tab","Main")
 main_tab.appendOpenFileChooser("input_csv","Input CSV","Comma Separated Values","csv")
 
