@@ -34,7 +34,7 @@ For each row read from the input CSV, matcher columns are checked from left to r
 **Note**: Column headers are case sensitive!
 
 | Column Header Format |Description   |
-|--|--|
+|----------------------|--------------|
 | `MatchQuery` | Matches items which are responsive to the given search query. |
 | `MatchQueryTopLevel` | Similar to `MatchQuery`, will run the given search query, but this matcher will yield the top level items of the search hits. |
 | `MatchQueryFamilies` | Similar to `MatchQuery`, will run the given search query, but this matcher will yield the entire families of the search hits. |
