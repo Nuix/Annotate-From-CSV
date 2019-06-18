@@ -16,6 +16,7 @@ class GUIDMatcher < CSVMatcherBase
 	# This method returns the items this matcher matches against given a particular row's value
 	def obtain_items(column_value,nuix_case)
 		# Run a search for the given GUID
+		AnnotationCSVParser.log("Obtaining items based on GUID...")
 		return nuix_case.search("guid:#{column_value}")
 	end
 

@@ -16,6 +16,7 @@ class QueryMatcher < CSVMatcherBase
 	# This method returns the items this matcher matches against given a particular row's value
 	def obtain_items(column_value,nuix_case)
 		# Run search based on given column value
+		AnnotationCSVParser.log("Obtaining query hits...")
 		return nuix_case.search(column_value)
 	end
 

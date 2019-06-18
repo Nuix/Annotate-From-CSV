@@ -16,6 +16,7 @@ class KindMatcher < CSVMatcherBase
 	# This method returns the items this matcher matches against given a particular row's value
 	def obtain_items(column_value,nuix_case)
 		# Run a search for the given kind
+		AnnotationCSVParser.log("Obtaining items based on kind...")
 		return nuix_case.search("kind:#{column_value}")
 	end
 

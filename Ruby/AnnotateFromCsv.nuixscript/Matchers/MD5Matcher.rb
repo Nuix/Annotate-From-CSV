@@ -16,6 +16,7 @@ class MD5Matcher < CSVMatcherBase
 	# This method returns the items this matcher matches against given a particular row's value
 	def obtain_items(column_value,nuix_case)
 		# Run a search for the given md5
+		AnnotationCSVParser.log("Obtaining items based on MD5...")
 		return nuix_case.search("md5:#{column_value}")
 	end
 

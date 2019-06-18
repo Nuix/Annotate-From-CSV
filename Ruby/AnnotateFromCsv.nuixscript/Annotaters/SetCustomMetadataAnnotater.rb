@@ -41,6 +41,7 @@ class SetCustomMetadataAnnotater < CSVAnnotaterBase
 				value_type = "text"
 				value = column_value
 			end
+			AnnotationCSVParser.log("Applying custom metdata field '#{@field_name}' to #{items.size} items")
 			$utilities.getBulkAnnotater.putCustomMetadata(@field_name,value,items,value_type,"user",nil,nil)
 		end
 	end

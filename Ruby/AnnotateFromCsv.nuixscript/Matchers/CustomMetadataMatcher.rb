@@ -19,7 +19,9 @@ class CustomMetadataMatcher < CSVMatcherBase
 	# This method returns the items this matcher matches against given a particular row's value
 	def obtain_items(column_value,nuix_case)
 		# Get intial items which match a custom metadata search
-		items = nuix_case.search("custom-metadata:\"#{@field_name}\":\"#{column_value}\"")
+		query = "custom-metadata:\"#{@field_name}\":\"#{column_value}\""
+		AnnotationCSVParser.log("Obtaining items based on custom metadata...")
+		items = nuix_case.search(query)
 		# Further validate each hit actually matches
 		items = items.select do |item|
 			next (item.getCustomMetadata[@field_name] || "").to_s == column_value

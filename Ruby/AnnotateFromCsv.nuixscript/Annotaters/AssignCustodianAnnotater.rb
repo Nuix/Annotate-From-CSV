@@ -16,6 +16,7 @@ class AssignCustodianAnnotater < CSVAnnotaterBase
 	def perform_annotation(items,column_value,nuix_case)
 		# Only assign custodian if column had a value
 		if !column_value.strip.empty?
+			AnnotationCSVParser.log("Assigning custodian '#{column_value}' to #{items.size} items")
 			$utilities.getBulkAnnotater.assignCustodian(column_value,items)
 		end
 	end

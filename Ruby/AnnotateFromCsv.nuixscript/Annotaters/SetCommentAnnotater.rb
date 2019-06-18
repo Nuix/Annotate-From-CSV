@@ -16,6 +16,7 @@ class SetCommentAnnotater < CSVAnnotaterBase
 	def perform_annotation(items,column_value,nuix_case)
 		# Set comment if column had a value
 		if !column_value.strip.empty?
+			AnnotationCSVParser.log("Setting comment on #{items.size} items")
 			items.each do |item|
 				item.setComment(column_value)
 			end

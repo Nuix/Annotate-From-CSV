@@ -16,6 +16,7 @@ class ExcludeAnnotater < CSVAnnotaterBase
 	def perform_annotation(items,column_value,nuix_case)
 		# Only exclude items if column had a value
 		if !column_value.strip.empty?
+			AnnotationCSVParser.log("Applying exclusion '#{column_value}' to #{items.size} items")
 			$utilities.getBulkAnnotater.exclude(column_value,items)
 		end
 	end

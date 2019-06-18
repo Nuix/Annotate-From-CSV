@@ -16,6 +16,7 @@ class DocumentIDMatcher < CSVMatcherBase
 	# This method returns the items this matcher matches against given a particular row's value
 	def obtain_items(column_value,nuix_case)
 		# Run a search for the given document id
+		AnnotationCSVParser.log("Obtaining items based on document ID...")
 		return nuix_case.search("document-id:#{column_value}")
 	end
 

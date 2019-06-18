@@ -19,6 +19,7 @@ class PropertyMatcher < CSVMatcherBase
 	# This method returns the items this matcher matches against given a particular row's value
 	def obtain_items(column_value,nuix_case)
 		# Run a search for the given property
+		AnnotationCSVParser.log("Obtaining items based on property...")
 		items = nuix_case.search("properties:\"#{@property_name}:#{column_value}\"")
 		# Further refine matches to only items where the given property contains the exact
 		# specified value
