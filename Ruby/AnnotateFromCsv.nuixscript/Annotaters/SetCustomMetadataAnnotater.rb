@@ -1,3 +1,19 @@
+java_import org.joda.time.format.DateTimeFormat
+java_import org.joda.time.DateTime
+
+class DateFormatPattern
+	attr_accessor :format
+	attr_accessor :regex
+
+	def initialize(format,regex)
+		@format = DateTimeFormat.forPattern(format)
+		@regex = regex
+		if regex.is_a?(String)
+			@regex = /#{regex}/
+		end
+	end
+end
+
 # Sets/overwrites custom meadata field.  Field name based on value provided in header and
 # value written to that field based on CSV row value
 class SetCustomMetadataAnnotater < CSVAnnotaterBase
@@ -5,6 +21,14 @@ class SetCustomMetadataAnnotater < CSVAnnotaterBase
 	@@number_regex = /^[0-9]+$/
 	@@float_regex = /^[0-9]+\.[0-9]+$/
 	@@bool_regex = /^(true)|(false)$/i
+
+	# This is where date time pattern recognition is specified.  Adding support for recognizing a new
+	# format means adding an additional DateFormatPattern.new(format,regex) below where:
+	# format - joda time format string, see for reference https://www.joda.org/joda-time/apidocs/org/joda/time/format/DateTimeFormat.html
+	# regex - Used to test a given input to see if it corresponds to a given format
+	@@date_time_patterns = [
+		DateFormatPattern.new("YYYY-MM-dd HH:mm:ssZZ",/^[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}[\+\-][0-9]{2}:[0-9]{2}$/),
+	]
 
 	@field_name = nil
 
@@ -38,8 +62,21 @@ class SetCustomMetadataAnnotater < CSVAnnotaterBase
 				value_type = "boolean"
 				value = column_value.strip.downcase == "true"
 			else
-				value_type = "text"
-				value = column_value
+				is_date = false
+				# Check to see if we recognize this as a valid date format
+				@@date_time_patterns.each do |pattern|
+					if column_value =~ pattern.regex
+						value = DateTime.parse(column_value,pattern.format)
+						value_type = "date-time"
+						is_date = true
+						break
+					end
+				end
+
+				if !is_date
+					value_type = "text"
+					value = column_value
+				end
 			end
 			AnnotationCSVParser.log("Applying custom metdata field '#{@field_name}' to #{items.size} items")
 			$utilities.getBulkAnnotater.putCustomMetadata(@field_name,value,items,value_type,"user",nil,nil)
