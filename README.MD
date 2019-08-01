@@ -61,7 +61,7 @@ Once a matcher has obtained items for a given row, each annotater column is ran 
 | `Exclude` | Excludes matched items into an exclusion named after the column value for the given row. |
 | `AppendComment` | Appends a comment to any existing comments on the matched items based on the column value for the given row.  Will set the comment for any items which do not already have a comment. |
 | `SetComment` | Sets a comment on matched items.  **Note:** that any existing comment on the matched items will be overwritten. |
-| `SetCustomMetadata:<NAME>` | Sets a custom metadata on matched items with a field named `<NAME>` and a value based on the column value for the given row.  **Note:** that existing values in the specified custom metdata field on the matched items will be overwritten! |
+| `SetCustomMetadata:<NAME>` | Sets a custom metadata on matched items with a field named `<NAME>` and a value based on the column value for the given row.  Attempts to identify and record proper data types.  So string "1234" should be recorded as integer 1234 and so on.  Has basic support for DateTime values, but currently only supports a value in the format `YYYY-MM-dd HH:mm:ssZZ` (ex: `2019-07-31 17:26:49-0700`).  See [SetCustomMetadataAnnotater.rb](https://github.com/Nuix/Annotate-From-CSV/blob/master/Ruby/AnnotateFromCsv.nuixscript/Annotaters/SetCustomMetadataAnnotater.rb) for adding additional formats.  **Note:** that existing values in the specified custom metdata field on the matched items will be overwritten! |
 
 # Extending
 
