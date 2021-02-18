@@ -13,6 +13,7 @@ This script allows you to apply annotations to a Nuix case based on a specially 
 - Set/Append Comments
 - Exclude Items
 - Assign Custodians
+- Set Custom Metadata
 
 # Getting Started
 
